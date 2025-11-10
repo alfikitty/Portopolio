@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Personal portfolio of Muhammad Zakri Alfiansyah – Videographer" />
+  <title>Alfian | Videographer</title>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+
+  <!-- AOS -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/img/favicon_edited.png" type="image/png" />
+
+  <!-- Custom Variables & Animations -->
+  <style>
+    :root {
+      --hue-color: 225;
+      --first-color: hsl(var(--hue-color), 69%, 61%);
+      --first-color-alt: hsl(var(--hue-color), 57%, 53%);
+      --first-color-lighter: hsl(var(--hue-color), 92%, 85%);
+      --title-color: hsl(var(--hue-color), 8%, 15%);
+      --text-color: hsl(var(--hue-color), 8%, 45%);
+      --text-color-light: hsl(var(--hue-color), 8%, 65%);
+      --input-color: hsl(var(--hue-color), 70%, 96%);
+      --body-color: hsl(var(--hue-color), 60%, 99%);
+      --container-color: #fff;
+      --scroll-bar-color: hsl(var(--hue-color), 12%, 90%);
+      --scroll-thumb-color: hsl(var(--hue-color), 12%, 80%);
+    }
+    body.dark-theme {
+      --first-color-second: hsl(var(--hue-color), 30%, 8%);
+      --title-color: hsl(var(--hue-color), 8%, 95%);
+      --text-color: hsl(var(--hue-color), 8%, 75%);
+      --input-color: hsl(var(--hue-color), 29%, 16%);
+      --body-color: hsl(var(--hue-color), 28%, 12%);
+      --container-color: hsl(var(--hue-color), 29%, 16%);
+      --scroll-bar-color: hsl(var(--hue-color), 12%, 48%);
+      --scroll-thumb-color: hsl(var(--hue-color), 12%, 36%);
+    }
+    body {
+      background-color: var(--body-color);
+      color: var(--text-color);
+      font-family: 'Poppins', sans-serif;
+    }
+    h1, h2, h3, h4 { color: var(--title-color); }
+    .wave {
+      display: inline-block;
+      animation: wave-animation 2.5s infinite;
+      transform-origin: 70% 70%;
+    }
+    @keyframes wave-animation {
+      0% { transform: rotate(0.0deg) }
+      10% { transform: rotate(14.0deg) }
+      20% { transform: rotate(-8.0deg) }
+      30% { transform: rotate(14.0deg) }
+      40% { transform: rotate(-4.0deg) }
+      50% { transform: rotate(10.0deg) }
+      60% { transform: rotate(0.0deg) }
+      100% { transform: rotate(0.0deg) }
+    }
+    .skills__percentage {
+      display: block;
+      height: 5px;
+      border-radius: 0.25rem;
+      background-color: var(--first-color);
+    }
+    .skills__camera { width: 85%; }
+    .skills__storyboard { width: 70%; }
+    .skills__publicspeaking { width: 80%; }
+    .skills__capcut { width: 95%; }
+    .skills__colorgrading { width: 60%; }
+    .skills__cinematography { width: 85%; }
+    .skills__lighting { width: 75%; }
+    .skills__sounddesign { width: 70%; }
+    .skills__motiongraphics { width: 65%; }
+    .skills__drone { width: 80%; }
+    .skills__scriptwriting { width: 75%; }
+    .skills__directing { width: 80%; }
+    ::-webkit-scrollbar {
+      width: 0.6rem;
+      background-color: var(--scroll-bar-color);
+      border-radius: 0.5rem;
+    }
+    ::-webkit-scrollbar-thumb {
+      background-color: var(--scroll-thumb-color);
+      border-radius: 0.5rem;
+    }
+    
+    /* Fix for product images */
+    .product-image-container {
+      width: 100%;
+      height: 200px;
+      overflow: hidden;
+      border-radius: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #f8f9fa;
+    }
+    .dark-theme .product-image-container {
+      background-color: #2d3748;
+    }
+    .product-image {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transition: transform 0.3s ease;
+    }
+    .product-card:hover .product-image {
+      transform: scale(1.05);
+    }
+    
+    /* Category tags */
+    .category-tag {
+      display: inline-block;
+      background-color: var(--first-color-lighter);
+      color: var(--first-color-alt);
+      padding: 0.25rem 0.5rem;
+      border-radius: 1rem;
+      margin: 0.125rem;
+      font-size: 0.7rem;
+      transition: all 0.3s ease;
+    }
+    .category-tag:hover {
+      background-color: var(--first-color);
+      color: white;
+    }
+  </style>
+</head>
+
+<body class="bg-[var(--body-color)] text-[var(--text-color)]">
+
+  <!-- ========== EDITABLE GLOBAL VARS ========== -->
+  <script>
+    const videos = [
+      "https://www.youtube.com/embed/im99Picx79Q?si=vuYZ5b5Sbx9P6v_k",
+      "https://www.instagram.com/zakrialff/reel/DJmWPfmSbke/",
+      "https://www.youtube.com/embed/3JZ_D3ELwOQ",
+      "https://www.youtube.com/embed/4NRXx6U8ABQ"
+    ];
+    const gear = [
+      {
+        name: "TWS Ngebas Sampe Budek",
+        img: "https://images.tokopedia.net/img/cache/700/aphluv/1997/1/1/a7b32bae83914777aca798c331e4d6a7~.jpeg",
+        linkTokopedia: "https://tk.tokopedia.com/ZSyF5vJoG/",
+        linkShopee: "https://shopee.co.id/product/YYYYY",
+        categories: ["tws", "audio", "headphone"]
+      },
+      {
+        name: "Ring Light Cahaya Ilahi",
+        img: "https://p16-images-sign-sg.tokopedia-static.net/tos-alisg-i-aphluv4xwc-sg/036473f4ca53473bba25ca43afc8dcae~tplv-aphluv4xwc-white-pad-v1:1600:1600.jpeg?lk3s=0ccea506&x-expires=1761852063&x-signature=F5PjNngLn1BWuW77sPmGR7yFzBo%3D&x-signature-webp=f4A9qZH%2B2%2FDGZPMELcabTYjqaNw%3D",
+        linkTokopedia: "https://tk.tokopedia.com/ZSyFayaXW/",
+        linkShopee: "https://shopee.co.id/product/YYYYY",
+        categories: ["lighting", "ringlight", "fotografi"]
+      },
+      {
+        name: "Hape Yang gw pake",
+        img: "https://images.tokopedia.net/img/cache/700/VqbcmM/2025/1/23/5f863a3b-c8b6-48ec-acf5-9c6bc1701463.jpg",
+        linkTokopedia: "https://tk.tokopedia.com/ZSyFaosCR/",
+        linkShopee: "https://shopee.co.id/product/ZZZZZZ",
+        categories: ["smartphone", "hp", "hape", "gadget"]
+      }
+    ];
+  </script>
+
+  <!-- ==================== NAVBAR ==================== -->
+  <header class="fixed top-0 left-0 w-full z-50 bg-[var(--body-color)] shadow-md">
+    <nav class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+      <a href="index.html" class="flex items-center">
+        <img src="/assets/img/logo.png" alt="Alfian Logo" class="h-8 md:h-10">
+      </a>
+
+      <!-- Desktop Menu -->
+      <ul class="hidden md:flex gap-6 items-center">
+        <li><a href="#home" class="hover:text-[var(--first-color)] transition">Home</a></li>
+        <li><a href="#about" class="hover:text-[var(--first-color)] transition">About</a></li>
+        <li><a href="#skills" class="hover:text-[var(--first-color)] transition">Skills</a></li>
+        <li><a href="#certificates" class="hover:text-[var(--first-color)] transition">Certificates</a></li>
+        <li><a href="#videos" class="hover:text-[var(--first-color)] transition">Videos</a></li>
+        <li><a href="/index/playlist.html" class="hover:text-[var(--first-color)] transition">Playlist</a></li>
+        <li><a href="#gear" class="hover:text-[var(--first-color)] transition">Shop</a></li>
+        <li><a href="#contact" class="hover:text-[var(--first-color)] transition">Contact</a></li>
+        <li><i class="uil uil-moon cursor-pointer text-[var(--title-color)]" id="theme-toggle"></i></li>
+      </ul>
+
+      <!-- Mobile Menu Button -->
+      <i class="uil uil-apps md:hidden text-2xl cursor-pointer" id="mobile-menu-toggle"></i>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 bg-[var(--body-color)]">
+      <ul class="flex flex-col gap-4">
+        <li><a href="#home" class="block hover:text-[var(--first-color)] transition">Home</a></li>
+        <li><a href="#about" class="block hover:text-[var(--first-color)] transition">About</a></li>
+        <li><a href="#skills" class="block hover:text-[var(--first-color)] transition">Skills</a></li>
+        <li><a href="#certificates" class="block hover:text-[var(--first-color)] transition">Certificates</a></li>
+        <li><a href="#videos" class="block hover:text-[var(--first-color)] transition">Videos</a></li>
+        <li><a href="/index/playlist.html" class="block hover:text-[var(--first-color)] transition">Playlist</a></li>
+        <li><a href="#gear" class="block hover:text-[var(--first-color)] transition">Shop</a></li>
+        <li><a href="#contact" class="block hover:text-[var(--first-color)] transition">Contact</a></li>
+        <li><i class="uil uil-moon cursor-pointer text-[var(--title-color)]" id="mobile-theme-toggle"></i></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- ==================== HOME ==================== -->
+  <section id="home" class="min-h-screen flex items-center justify-center px-6 pt-20">
+    <div data-aos="fade-left" class="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-center">
+      <div>
+        <h1 class="text-4xl md:text-5xl font-bold">Hi! <span class="wave">👋</span>, I'm Alfian</h1>
+        <h3 class="text-xl md:text-2xl mt-3">and I'm <span class="auto-input text-[var(--first-color)] font-semibold"></span></h3>
+        <p class="mt-5 text-[var(--text-color-light)]">
+          A passionate videographer with experience in storytelling, cinematography, and post-production. I create visually compelling content that connects emotionally with audiences.
+        </p>
+
+        <!-- DUA TOMBOL SEJAJAR -->
+        <div class="mt-6 flex flex-col sm:flex-row gap-4">
+          <a href="#contact" class="inline-flex items-center px-6 py-3 bg-[var(--first-color)] text-white rounded-lg hover:bg-[var(--first-color-alt)] transition">
+            Contact Me <i class="uil uil-message ml-2"></i>
+          </a>
+          <a href="/index/playlist.html" class="inline-flex items-center px-6 py-3 border-2 border-[var(--first-color)] text-[var(--first-color)] rounded-lg hover:bg-[var(--first-color)] hover:text-white transition">
+            My Playlist <i class="uil uil-music ml-2"></i>
+          </a>
+        </div>
+      </div>
+      <div class="flex justify-center">
+        <img src="/assets/img/perfil.png" alt="Profile" class="w-64 md:w-80 rounded-full shadow-2xl">
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== ABOUT ==================== -->
+  <section id="about" class="py-20 px-6">
+    <h2 class="text-3xl md:text-4xl font-bold text-center">About Me</h2>
+    <p class="text-center text-[var(--text-color-light)] mt-2">Tentang si Tampan ini</p>
+
+    <div data-aos="fade-up" class="max-w-5xl mx-auto mt-12 grid md:grid-cols-2 gap-10 items-center">
+      <div class="flex justify-center">
+        <img src="/assets/img/perfil.png" alt="About" class="w-64 md:w-72 rounded-2xl shadow-2xl">
+      </div>
+      <div>
+        <p class="text-lg leading-relaxed">
+          I'm <strong>Muhammad Zakri Alfiansyah</strong>, a creative <span class="text-[var(--first-color)] font-semibold">videographer</span> with expertise in storytelling, camera operation, and post-production. I love turning ideas into powerful visual narratives that inspire and engage.
+        </p>
+
+        <div class="flex gap-8 mt-8">
+          <div>
+            <span class="text-3xl font-bold">03+</span>
+            <p class="text-sm text-[var(--text-color-light)]">Years experience</p>
+          </div>
+          <div>
+            <span class="text-3xl font-bold">50+</span>
+            <p class="text-sm text-[var(--text-color-light)]">Projects completed</p>
+          </div>
+          <div>
+            <span class="text-3xl font-bold">24/7</span>
+            <p class="text-sm text-[var(--text-color-light)]">Online support</p>
+          </div>
+        </div>
+
+        <a href="assets/pdf/CV_alfian.pdf" download class="inline-flex items-center mt-8 px-6 py-3 bg-[var(--first-color)] text-white rounded-lg hover:bg-[var(--first-color-alt)] transition">
+          Download CV <i class="uil uil-download-alt ml-2"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SKILLS ==================== -->
+  <section id="skills" class="py-20 px-6">
+    <h2 class="text-3xl font-bold text-center">Skills</h2>
+    <p class="text-center text-[var(--text-color-light)]">Skill yang gw punya</p>
+
+    <div data-aos="fade-up" class="max-w-5xl mx-auto mt-10 grid md:grid-cols-2 gap-8">
+      <!-- Production Skills -->
+      <div class="bg-white dark:bg-[var(--container-color)] p-6 rounded-2xl shadow-lg">
+        <h3 class="text-xl font-semibold mb-4">Production Skills</h3>
+        <div class="space-y-4">
+          <div>
+            <div class="flex justify-between"><span>Camera Operation</span><span>85%</span></div>
+            <div class="w-full bg-gray-200 rounded-full h-1 mt-1"><div class="skills__percentage skills__camera"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between"><span>Storyboarding</span><span>70%</span></div>
+            <div class="w-full bg-gray-200 rounded-full h-1 mt-1"><div class="skills__percentage skills__storyboard"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between"><span>Public Speaking</span><span>80%</span></div>
+            <div class="w-full bg-gray-200 rounded-full h-1 mt-1"><div class="skills__percentage skills__publicspeaking"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between"><span>Cinematography</span><span>85%</span></div>
+            <div class="w-full bg-gray-200 rounded-full h-1 mt-1"><div class="skills__percentage skills__cinematography"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between"><span>Lighting Setup</span><span>75%</span></div>
+            <div class="w-full bg-gray-200 rounded-full h-1 mt-1"><div class="skills__percentage skills__lighting"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between"><span>Drone Operation</span><span>80%</span></div>
+            <div class="w-full bg-gray-200 rounded-full h-1 mt-1"><div class="skills__percentage skills__drone"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Post-Production Skills -->
+      <div class="bg-white dark:bg-[var(--container-color)] p-6 rounded-2xl shadow-lg">
+        <h3 class="text-xl font-semibold mb-4">Post-Production Skills</h3>
+        <div class="space-y-4">
+          <div>
+            <div class="flex justify-between"><span>CapCut Editing</span><span>95%</span></div>
+            <div class="w-full bg-gray-200 rounded-full h-1 mt-1"><div class="skills__percentage skills__capcut"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between"><span>Color Grading</span><span>60%</span></div>
+            <div class="w-full bg-gray-200 rounded-full h-1 mt-1"><div class="skills__percentage skills__colorgrading"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between"><span>Sound Design</span><span>70%</span></div>
+            <div class="w-full bg-gray-200 rounded-full h-1 mt-1"><div class="skills__percentage skills__sounddesign"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between"><span>Script Writing</span><span>75%</span></div>
+            <div class="w-full bg-gray-200 rounded-full h-1 mt-1"><div class="skills__percentage skills__scriptwriting"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between"><span>Directing</span><span>80%</span></div>
+            <div class="w-full bg-gray-200 rounded-full h-1 mt-1"><div class="skills__percentage skills__directing"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CERTIFICATES ==================== -->
+  <section id="certificates" class="py-20 px-6">
+    <h2 class="text-3xl font-bold text-center">Certificates</h2>
+    <p class="text-center text-[var(--text-color-light)]">My achievements</p>
+
+    <div data-aos="fade-up" class="max-w-5xl mx-auto mt-10 grid md:grid-cols-3 gap-6">
+      <div class="bg-white dark:bg-[var(--container-color)] p-4 rounded-2xl shadow-lg">
+        <img src="/assets/img/MedaliEmas_page-0001.jpg" alt="Certificate" class="rounded-lg">
+        <p class="mt-3 font-semibold">Medali Emas Lomba Pengetahuan Aqidah</p>
+        <a href="/assets/pdf/MedaliEmas.pdf" target="_blank" class="text-sm text-[var(--first-color)] hover:underline">View PDF</a>
+      </div>
+      <div class="bg-white dark:bg-[var(--container-color)] p-4 rounded-2xl shadow-lg">
+        <img src="/assets/img/TOAFL_page-0001.jpg" alt="Certificate" class="rounded-lg">
+        <p class="mt-3 font-semibold">Test of Arabic as a Foreign Language</p>
+        <a href="/assets/pdf/TOAFL.pdf" target="_blank" class="text-sm text-[var(--first-color)] hover:underline">View PDF</a>
+      </div>
+      <div class="bg-white dark:bg-[var(--container-color)] p-4 rounded-2xl shadow-lg">
+        <img src="/assets/img/TOEFL_page-0001.jpg" alt="Certificate" class="rounded-lg">
+        <p class="mt-3 font-semibold">Test of English as a Foreign Language</p>
+        <a href="/assets/pdf/TOEFL.pdf" target="_blank" class="text-sm text-[var(--first-color)] hover:underline">View PDF</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== MY VIDEOS ==================== -->
+  <section id="videos" class="py-20 px-6">
+    <h2 class="text-3xl font-bold text-center">My Videos</h2>
+    <p class="text-center text-[var(--text-color-light)]">Ntar gw jadi content kreator (coming soon)</p>
+
+    <div data-aos="fade-up" class="max-w-6xl mx-auto mt-10 grid md:grid-cols-2 gap-6">
+      <!-- Video 1 -->
+      <div class="bg-white dark:bg-[var(--container-color)] rounded-2xl shadow-lg overflow-hidden flex items-center justify-center h-64">
+        <p class="text-[var(--text-color-light)]">Ntar Videonya Gw Taro 🎬</p>
+      </div>
+
+      <!-- Video 2 -->
+      <div class="bg-white dark:bg-[var(--container-color)] rounded-2xl shadow-lg overflow-hidden flex items-center justify-center h-64">
+        <p class="text-[var(--text-color-light)]">Ntar Videonya Gw Taro 🎬</p>
+      </div>
+
+      <!-- Video 3 -->
+      <div class="bg-white dark:bg-[var(--container-color)] rounded-2xl shadow-lg overflow-hidden flex items-center justify-center h-64">
+        <p class="text-[var(--text-color-light)]">Ntar Videonya Gw Taro 🎬</p>
+      </div>
+
+      <!-- Video 4 -->
+      <div class="bg-white dark:bg-[var(--container-color)] rounded-2xl shadow-lg overflow-hidden flex items-center justify-center h-64">
+        <p class="text-[var(--text-color-light)]">Ntar Videonya Gw Taro 🎬</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SHOP SECTION ==================== -->
+  <section id="gear" class="py-20 px-6">
+    <h2 class="text-3xl font-bold text-center">Shop</h2>
+    <p class="text-center text-[var(--text-color-light)]">Barang yang biasanya gw pake</p>
+
+    <div data-aos="fade-up" class="max-w-5xl mx-auto mt-10 grid md:grid-cols-3 gap-6" id="gear-grid">
+      <!-- Gear cards will be injected here -->
+    </div>
+
+    <!-- Tombol Lihat Lebih Banyak -->
+    <div class="max-w-5xl mx-auto mt-8 flex justify-center">
+      <a href="/index/affiliate.html" class="inline-flex items-center px-6 py-3 bg-[var(--first-color)] text-white rounded-lg hover:bg-[var(--first-color-alt)] transition">
+        Lihat Lebih Banyak <i class="uil uil-arrow-right ml-2"></i>
+      </a>
+    </div>
+  </section>
+
+  <!-- ==================== CONTACT ==================== -->
+  <section id="contact" class="py-20 px-6">
+  <h2 class="text-3xl font-bold text-center">Contact Me</h2>
+  <p class="text-center text-[var(--text-color-light)]">Tinggal kirim ae ini</p>
+
+  <div data-aos="fade-in" class="max-w-4xl mx-auto mt-8 grid md:grid-cols-2 gap-8">
+    
+    <!-- Contact Info -->
+    <div>
+      <!-- Instagram -->
+      <div class="flex items-center gap-4 mb-4">
+        <i class="uil uil-instagram text-2xl text-[var(--first-color)]"></i>
+        <div>
+          <h3 class="font-semibold">Instagram</h3>
+          <a 
+            href="https://www.instagram.com/zakrialff/" 
+            target="_blank" 
+            class="text-sm text-[var(--text-color-light)] hover:underline"
+          >
+            @zakrialff
+          </a>
+        </div>
+      </div>
+
+      <!-- GitHub -->
+      <div class="flex items-center gap-4 mb-4">
+        <i class="uil uil-github-alt text-2xl text-[var(--first-color)]"></i>
+        <div>
+          <h3 class="font-semibold">GitHub</h3>
+          <a 
+            href="https://github.com/alfikitty" 
+            target="_blank" 
+            class="text-sm text-[var(--text-color-light)] hover:underline"
+          >
+            github.com/alfikitty
+          </a>
+        </div>
+      </div>
+
+      <!-- LinkedIn -->
+      <div class="flex items-center gap-4 mb-4">
+        <i class="uil uil-linkedin-alt text-2xl text-[var(--first-color)]"></i>
+        <div>
+          <h3 class="font-semibold">LinkedIn</h3>
+          <a 
+            href="https://www.linkedin.com/in/zakrialfiansyah/" 
+            target="_blank" 
+            class="text-sm text-[var(--text-color-light)] hover:underline"
+          >
+            linkedin.com/zakrialfiansyah
+          </a>
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div class="flex items-center gap-4">
+        <i class="uil uil-envelope text-2xl text-[var(--first-color)]"></i>
+        <div>
+          <h3 class="font-semibold">Email</h3>
+          <span class="text-sm text-[var(--text-color-light)]">
+            alfiansyah13244@gmail.com
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact Form -->
+    <form 
+      action="https://formsubmit.co/alfiansyah13244@gmail.com" 
+      method="POST" 
+      class="space-y-4"
+    >
+      <div class="grid md:grid-cols-2 gap-4">
+        <input 
+          type="text" 
+          name="name" 
+          placeholder="Your Name" 
+          class="w-full px-4 py-2 rounded-lg bg-[var(--input-color)] text-[var(--text-color)]" 
+          required 
+        />
+        <input 
+          type="email" 
+          name="email" 
+          placeholder="Your Email" 
+          class="w-full px-4 py-2 rounded-lg bg-[var(--input-color)] text-[var(--text-color)]" 
+          required 
+        />
+      </div>
+
+      <input 
+        type="text" 
+        name="project" 
+        placeholder="Project" 
+        class="w-full px-4 py-2 rounded-lg bg-[var(--input-color)] text-[var(--text-color)]" 
+        required 
+      />
+
+      <textarea 
+        name="message" 
+        rows="5" 
+        placeholder="Your Message" 
+        class="w-full px-4 py-2 rounded-lg bg-[var(--input-color)] text-[var(--text-color)]" 
+        required
+      ></textarea>
+
+      <button 
+        type="submit" 
+        class="inline-flex items-center px-6 py-3 bg-[var(--first-color)] text-white rounded-lg hover:bg-[var(--first-color-alt)] transition"
+      >
+        Send Message <i class="uil uil-message ml-2"></i>
+      </button>
+    </form>
+
+  </div>
+</section>
+
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="bg-[var(--first-color)] text-white py-10 px-6">
+    <div class="max-w-6xl mx-auto grid md:grid-cols-3 gap-6">
+      <div>
+        <h1 class="text-2xl font-bold">Alfian</h1>
+        <p class="text-sm">Videographer</p>
+      </div>
+      <ul class="flex flex-col gap-2">
+        <li><a href="#about" class="hover:underline">About</a></li>
+        <li><a href="#skills" class="hover:underline">Skills</a></li>
+        <li><a href="#certificates" class="hover:underline">Certificates</a></li>
+        <li><a href="#gear" class="hover:underline">Shop</a></li>
+        <li><a href="#contact" class="hover:underline">Contact</a></li>
+      </ul>
+      <div class="flex gap-4">
+        <a href="https://www.instagram.com/zakrialff/" target="_blank"><i class="uil uil-instagram text-2xl"></i></a>
+        <a href="https://github.com/alfikitty" target="_blank"><i class="uil uil-github-alt text-2xl"></i></a>
+        <a href="https://www.linkedin.com/in/zakrialfiansyah/" target="_blank"><i class="uil uil-linkedin-alt text-2xl"></i></a>
+      </div>
+    </div>
+    <p class="text-center text-sm mt-6">&copy; 2025 Alfian. All rights reserved.</p>
+  </footer>
+
+  <!-- Scroll Up -->
+  <a href="#" id="scroll-up" class="fixed bottom-20 right-6 bg-[var(--first-color)] text-white p-2 rounded-full shadow-lg hover:bg-[var(--first-color-alt)] transition">
+    <i class="uil uil-arrow-up text-xl"></i>
+  </a>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+  <script>
+    AOS.init({ offset: 300, duration: 2000 });
+
+    new Typed(".auto-input", {
+      strings: ["a Videographer", "a Storyteller", "an Editor", "a Creative"],
+      typeSpeed: 100,
+      backSpeed: 100,
+      loop: true
+    });
+
+    const toggleTheme = () => document.body.classList.toggle("dark-theme");
+    document.getElementById("theme-toggle").addEventListener("click", toggleTheme);
+    document.getElementById("mobile-theme-toggle").addEventListener("click", toggleTheme);
+
+    const mobileMenu = document.getElementById("mobile-menu");
+    document.getElementById("mobile-menu-toggle").addEventListener("click", () => {
+      mobileMenu.classList.toggle("hidden");
+    });
+
+    // Render My Gear after DOM ready
+    document.addEventListener('DOMContentLoaded', () => {
+      const grid = document.getElementById('gear-grid');
+      if (!grid) return;
+      
+      gear.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'product-card bg-white dark:bg-[var(--container-color)] p-4 rounded-2xl shadow-lg text-center transition-transform hover:scale-105';
+        card.innerHTML = `
+          <div class="product-image-container">
+            <img src="${item.img}" alt="${item.name}" class="product-image">
+          </div>
+          <h3 class="mt-3 font-semibold text-lg">${item.name}</h3>
+          <div class="flex flex-wrap justify-center mt-2 mb-3">
+            ${item.categories.map(cat => 
+              `<span class="category-tag">${cat}</span>`
+            ).join('')}
+          </div>
+          <div class="flex gap-2 justify-center mt-3">
+            <a href="${item.linkTokopedia}" target="_blank" class="px-3 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition text-sm flex items-center">
+              <i class="uil uil-shopping-bag mr-1"></i> Tokopedia
+            </a>
+            <a href="${item.linkShopee}" target="_blank" class="px-3 py-2 bg-orange-500 text-white rounded hover:bg-orange-600 transition text-sm flex items-center">
+              <i class="uil uil-shopping-cart mr-1"></i> Shopee
+            </a>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    });
+  </script>
+</body>
+</html>

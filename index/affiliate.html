@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Alfian's Gear Deals – Tokopedia & Shopee Affiliate" />
+  <title>Alfian | Shop</title>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+
+  <!-- AOS -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/img/favicon_edited.png" type="image/png" />
+
+  <style>
+    :root {
+      --hue-color: 225;
+      --first-color: hsl(var(--hue-color), 69%, 61%);
+      --first-color-alt: hsl(var(--hue-color), 57%, 53%);
+      --first-color-lighter: hsl(var(--hue-color), 92%, 85%);
+      --title-color: hsl(var(--hue-color), 8%, 15%);
+      --text-color: hsl(var(--hue-color), 8%, 45%);
+      --text-color-light: hsl(var(--hue-color), 8%, 65%);
+      --input-color: hsl(var(--hue-color), 70%, 96%);
+      --body-color: hsl(var(--hue-color), 60%, 99%);
+      --container-color: #fff;
+      --scroll-bar-color: hsl(var(--hue-color), 12%, 90%);
+      --scroll-thumb-color: hsl(var(--hue-color), 12%, 80%);
+    }
+
+    body.dark-theme {
+      --first-color-second: hsl(var(--hue-color), 30%, 8%);
+      --title-color: hsl(var(--hue-color), 8%, 95%);
+      --text-color: hsl(var(--hue-color), 8%, 75%);
+      --input-color: hsl(var(--hue-color), 29%, 16%);
+      --body-color: hsl(var(--hue-color), 28%, 12%);
+      --container-color: hsl(var(--hue-color), 29%, 16%);
+      --scroll-bar-color: hsl(var(--hue-color), 12%, 48%);
+      --scroll-thumb-color: hsl(var(--hue-color), 12%, 36%);
+    }
+
+    body {
+      background-color: var(--body-color);
+      color: var(--text-color);
+      font-family: 'Poppins', sans-serif;
+    }
+
+    h1, h2, h3, h4 {
+      color: var(--title-color);
+    }
+
+    .wave {
+      display: inline-block;
+      animation: wave-animation 2.5s infinite;
+      transform-origin: 70% 70%;
+    }
+
+    @keyframes wave-animation {
+      0% { transform: rotate(0.0deg) }
+      10% { transform: rotate(14.0deg) }
+      20% { transform: rotate(-8.0deg) }
+      30% { transform: rotate(14.0deg) }
+      40% { transform: rotate(-4.0deg) }
+      50% { transform: rotate(10.0deg) }
+      60% { transform: rotate(0.0deg) }
+      100% { transform: rotate(0.0deg) }
+    }
+
+    .skills__percentage {
+      display: block;
+      height: 5px;
+      border-radius: 0.25rem;
+      background-color: var(--first-color);
+    }
+
+    ::-webkit-scrollbar {
+      width: 0.6rem;
+      background-color: var(--scroll-bar-color);
+      border-radius: 0.5rem;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background-color: var(--scroll-thumb-color);
+      border-radius: 0.5rem;
+    }
+    
+    /* Custom styles for category tags */
+    .category-tag {
+      display: inline-block;
+      background-color: var(--first-color-lighter);
+      color: var(--first-color-alt);
+      padding: 0.25rem 0.5rem;
+      border-radius: 1rem;
+      margin: 0.125rem;
+      font-size: 0.7rem;
+      transition: all 0.3s ease;
+    }
+    .category-tag:hover {
+      background-color: var(--first-color);
+      color: white;
+    }
+    
+    /* Fix for product images */
+    .product-image-container {
+      width: 100%;
+      height: 250px;
+      overflow: hidden;
+      border-radius: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #f8f9fa;
+    }
+    .dark-theme .product-image-container {
+      background-color: #2d3748;
+    }
+    .product-image {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transition: transform 0.3s ease;
+    }
+    .product-card:hover .product-image {
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+
+<body class="bg-[var(--body-color)] text-[var(--text-color)]">
+
+  <!-- ========== EDITABLE VARS ========== -->
+  <script>
+    const affProducts = [
+      {
+        name: "TWS Ngebas Sampe Budek",
+        img: "https://images.tokopedia.net/img/cache/700/aphluv/1997/1/1/a7b32bae83914777aca798c331e4d6a7~.jpeg",
+        linkTokopedia: "https://tk.tokopedia.com/ZSyF5vJoG/",
+        linkShopee: "https://shopee.co.id/product/YYYYY",
+        categories: ["tws"]
+      },
+      {
+        name: "Ring Light Cahaya Ilahi",
+        img: "https://p16-images-sign-sg.tokopedia-static.net/tos-alisg-i-aphluv4xwc-sg/036473f4ca53473bba25ca43afc8dcae~tplv-aphluv4xwc-white-pad-v1:1600:1600.jpeg?lk3s=0ccea506&x-expires=1761852063&x-signature=F5PjNngLn1BWuW77sPmGR7yFzBo%3D&x-signature-webp=f4A9qZH%2B2%2FDGZPMELcabTYjqaNw%3D",
+        linkTokopedia: "https://tk.tokopedia.com/ZSyFayaXW/",
+        linkShopee: "https://shopee.co.id/product/YYYYY",
+        categories: ["lighting", "ringlight"]
+      },
+      {
+        name: "Hape Yang gw pake",
+        img: "https://images.tokopedia.net/img/cache/700/VqbcmM/2025/1/23/5f863a3b-c8b6-48ec-acf5-9c6bc1701463.jpg",
+        linkTokopedia: "https://tk.tokopedia.com/ZSyFaosCR/",
+        linkShopee: "https://shopee.co.id/product/ZZZZZZ",
+        categories: ["smartphone", "hp", "hape"]
+      },
+      {
+        name: "Kamera Mirrorless Murah",
+        img: "https://images.tokopedia.net/img/cache/700/VqbcmM/2024/12/26/2d5b1a6f-8d4b-4e3a-80c0-99b7b3d5a1a1.jpg",
+        linkTokopedia: "https://tk.tokopedia.com/ZSyFaosCR/",
+        linkShopee: "https://shopee.co.id/product/ZZZZZZ",
+        categories: ["kamera", "fotografi", "mirrorless", "video", "content creator", "murah"]
+      },
+      {
+        name: "Mic Studio Kualitas Radio",
+        img: "https://images.tokopedia.net/img/cache/700/VqbcmM/2024/11/15/8a8b8c8d-9e9f-0a1b-2c3d-4e5f6a7b8c9d.jpg",
+        linkTokopedia: "https://tk.tokopedia.com/ZSyFaosCR/",
+        linkShopee: "https://shopee.co.id/product/ZZZZZZ",
+        categories: ["audio", "microphone", "studio", "recording", "radio", "podcast"]
+      },
+      {
+        name: "Tripod Stabil Anti Goyang",
+        img: "https://images.tokopedia.net/img/cache/700/VqbcmM/2024/10/20/1a2b3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d.jpg",
+        linkTokopedia: "https://tk.tokopedia.com/ZSyFaosCR/",
+        linkShopee: "https://shopee.co.id/product/ZZZZZZ",
+        categories: ["tripod", "fotografi", "stabil", "video", "kamera", "anti goyang"]
+      }
+    ];
+  </script>
+
+  <!-- ========== NAVBAR ========== -->
+  <header class="fixed top-0 left-0 w-full z-50 bg-[var(--body-color)] shadow-md">
+    <nav class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+      <a href="../index.html" class="text-xl font-bold text-[var(--title-color)]">Alfian</a>
+      <ul class="hidden md:flex gap-6 items-center">
+        <li><a href="../index.html" class="hover:text-[var(--first-color)] transition">Home</a></li>
+        <li><a href="../index.html#about" class="hover:text-[var(--first-color)] transition">About</a></li>
+        <li><a href="../index.html#skills" class="hover:text-[var(--first-color)] transition">Skills</a></li>
+        <li><a href="../index.html#certificates" class="hover:text-[var(--first-color)] transition">Certificates</a></li>
+        <li><a href="../index.html#videos" class="hover:text-[var(--first-color)] transition">Videos</a></li>
+        <li><a href="playlist.html" class="hover:text-[var(--first-color)] transition">Playlist</a></li>
+        <li><a href="affiliate.html" class="text-[var(--first-color)] font-semibold transition">Shop</a></li>
+        <li><a href="../index.html#contact" class="hover:text-[var(--first-color)] transition">Contact</a></li>
+        <li><i class="uil uil-moon cursor-pointer text-[var(--title-color)]" id="theme-toggle"></i></li>
+      </ul>
+      <i class="uil uil-apps md:hidden text-2xl cursor-pointer" id="mobile-menu-toggle"></i>
+    </nav>
+
+    <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 bg-[var(--body-color)]">
+      <ul class="flex flex-col gap-4">
+        <li><a href="../index.html" class="block hover:text-[var(--first-color)] transition">Home</a></li>
+        <li><a href="../index.html#about" class="block hover:text-[var(--first-color)] transition">About</a></li>
+        <li><a href="../index.html#skills" class="block hover:text-[var(--first-color)] transition">Skills</a></li>
+        <li><a href="../index.html#certificates" class="block hover:text-[var(--first-color)] transition">Certificates</a></li>
+        <li><a href="../index.html#videos" class="block hover:text-[var(--first-color)] transition">Videos</a></li>
+        <li><a href="../index.html#playlist" class="block hover:text-[var(--first-color)] transition">Playlist</a></li>
+        <li><a href="affiliate.html" class="block text-[var(--first-color)] font-semibold transition">Shop</a></li>
+        <li><a href="../index.html#contact" class="block hover:text-[var(--first-color)] transition">Contact</a></li>
+        <li><i class="uil uil-moon cursor-pointer text-[var(--title-color)]" id="mobile-theme-toggle"></i></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- ==================== HERO ==================== -->
+  <section id="home" class="min-h-screen flex items-center justify-center px-6 pt-20">
+    <div data-aos="fade-left" class="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-center">
+      <div>
+        <h1 class="text-4xl md:text-5xl font-bold">Shop<span class="wave">🛍️</span></h1>
+        <p class="mt-5 text-[var(--text-color-light)]">
+          Semua kebutuhan yang saya pakai sehari-hari — tersedia di Tokopedia & Shopee dengan harga terbaik.
+        </p>
+        <a href="#deals" class="inline-flex items-center mt-6 px-6 py-3 bg-[var(--first-color)] text-white rounded-lg hover:bg-[var(--first-color-alt)] transition">
+          Lihat Produk <i class="uil uil-arrow-down ml-2"></i>
+        </a>
+      </div>
+      <div class="flex justify-center">
+        <img src="/assets/img/perfil.png" alt="Deals" class="w-64 md:w-80 rounded-full shadow-2xl">
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== DAFTAR PRODUK ==================== -->
+  <section id="deals" class="py-20 px-6">
+    <h2 class="text-3xl font-bold text-center">Produk Affiliate</h2>
+    <p class="text-center text-[var(--text-color-light)]">Pilih marketplace favoritmu</p>
+
+    <!-- Search Bar -->
+    <div class="max-w-5xl mx-auto mt-6 flex justify-center">
+      <input
+        type="text"
+        id="search-input"
+        placeholder="Cari produk atau kategori (contoh: audio, fotografi, gadget)..."
+        class="w-full md:w-1/2 px-4 py-2 rounded-xl border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-[var(--first-color)] dark:bg-[var(--container-color)] dark:text-[var(--text-color)]"
+      />
+    </div>
+
+    <!-- Grid Produk -->
+    <div data-aos="fade-up" class="max-w-5xl mx-auto mt-10 grid md:grid-cols-3 gap-6" id="deals-grid"></div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="bg-[var(--first-color)] text-white py-10 px-6">
+    <div class="max-w-6xl mx-auto text-center">
+      <h2 class="text-xl font-bold mb-2">Temukan Saya</h2>
+      <div class="flex justify-center gap-4">
+        <a href="https://www.instagram.com/zakrialff/" target="_blank"><i class="uil uil-instagram text-2xl"></i></a>
+        <a href="https://github.com/alfikitty" target="_blank"><i class="uil uil-github-alt text-2xl"></i></a>
+        <a href="https://twitter.com/mrinmoy91013697" target="_blank"><i class="uil uil-twitter-alt text-2xl"></i></a>
+      </div>
+      <p class="text-sm mt-4">&copy; 2025 Alfian. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Scroll Up -->
+  <a href="#" class="fixed bottom-20 right-6 bg-[var(--first-color)] text-white p-2 rounded-full shadow-lg hover:bg-[var(--first-color-alt)] transition">
+    <i class="uil uil-arrow-up text-xl"></i>
+  </a>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init({ offset: 300, duration: 2000 });
+
+    // Dark-mode toggle
+    const toggleTheme = () => document.body.classList.toggle("dark-theme");
+    document.getElementById("theme-toggle").addEventListener("click", toggleTheme);
+    document.getElementById("mobile-theme-toggle").addEventListener("click", toggleTheme);
+
+    // Mobile menu
+    const mobileMenu = document.getElementById("mobile-menu");
+    document.getElementById("mobile-menu-toggle").addEventListener("click", () => {
+      mobileMenu.classList.toggle("hidden");
+    });
+
+    // Render produk affiliate dengan search
+    const grid = document.getElementById('deals-grid');
+
+    function renderProducts(filter = "") {
+      grid.innerHTML = "";
+      affProducts
+        .filter(item => {
+          if (!filter) return true;
+          
+          const searchTerm = filter.toLowerCase();
+          const nameMatch = item.name.toLowerCase().includes(searchTerm);
+          const categoryMatch = item.categories.some(cat => 
+            cat.toLowerCase().includes(searchTerm)
+          );
+          
+          return nameMatch || categoryMatch;
+        })
+        .forEach(item => {
+          const card = document.createElement('div');
+          card.className = 'product-card bg-white dark:bg-[var(--container-color)] p-4 rounded-2xl shadow-lg text-center transition-transform hover:scale-105';
+          card.innerHTML = `
+            <div class="product-image-container">
+              <img src="${item.img}" alt="${item.name}" class="product-image">
+            </div>
+            <h3 class="mt-3 font-semibold text-lg">${item.name}</h3>
+            <div class="flex flex-wrap justify-center mt-2 mb-3">
+              ${item.categories.map(cat => 
+                `<span class="category-tag">${cat}</span>`
+              ).join('')}
+            </div>
+            <div class="flex gap-2 justify-center mt-3">
+              <a href="${item.linkTokopedia}" target="_blank" class="px-3 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition text-sm flex items-center">
+                <i class="uil uil-shopping-bag mr-1"></i> Tokopedia
+              </a>
+              <a href="${item.linkShopee}" target="_blank" class="px-3 py-2 bg-orange-500 text-white rounded hover:bg-orange-600 transition text-sm flex items-center">
+                <i class="uil uil-shopping-cart mr-1"></i> Shopee
+              </a>
+            </div>
+          `;
+          grid.appendChild(card);
+        });
+    }
+
+    // Initial render
+    renderProducts();
+
+    // Live search
+    document.getElementById('search-input').addEventListener('input', (e) => {
+      renderProducts(e.target.value);
+    });
+  </script>
+</body>
+</html>

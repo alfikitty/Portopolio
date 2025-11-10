@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="My Playlist – Muhammad Zakri Alfiansyah" />
+  <title>Playlist Gwe | Alfian</title>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com "></script>
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css " />
+
+  <!-- AOS -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css " />
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/img/favicon_edited.png" type="image/png" />
+
+  <!-- Custom Variables (sama dengan index) -->
+  <style>
+    :root {
+      --hue-color: 225;
+      --first-color: hsl(var(--hue-color), 69%, 61%);
+      --first-color-alt: hsl(var(--hue-color), 57%, 53%);
+      --first-color-lighter: hsl(var(--hue-color), 92%, 85%);
+      --title-color: hsl(var(--hue-color), 8%, 15%);
+      --text-color: hsl(var(--hue-color), 8%, 45%);
+      --text-color-light: hsl(var(--hue-color), 8%, 65%);
+      --input-color: hsl(var(--hue-color), 70%, 96%);
+      --body-color: hsl(var(--hue-color), 60%, 99%);
+      --container-color: #fff;
+      --scroll-bar-color: hsl(var(--hue-color), 12%, 90%);
+      --scroll-thumb-color: hsl(var(--hue-color), 12%, 80%);
+    }
+    body.dark-theme {
+      --first-color-second: hsl(var(--hue-color), 30%, 8%);
+      --title-color: hsl(var(--hue-color), 8%, 95%);
+      --text-color: hsl(var(--hue-color), 8%, 75%);
+      --input-color: hsl(var(--hue-color), 29%, 16%);
+      --body-color: hsl(var(--hue-color), 28%, 12%);
+      --container-color: hsl(var(--hue-color), 29%, 16%);
+      --scroll-bar-color: hsl(var(--hue-color), 12%, 48%);
+      --scroll-thumb-color: hsl(var(--hue-color), 12%, 36%);
+    }
+    body {
+      background-color: var(--body-color);
+      color: var(--text-color);
+      font-family: 'Poppins', sans-serif;
+    }
+    h1, h2, h3, h4 { color: var(--title-color); }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 0.6rem;
+      background-color: var(--scroll-bar-color);
+      border-radius: 0.5rem;
+    }
+    ::-webkit-scrollbar-thumb {
+      background-color: var(--scroll-thumb-color);
+      border-radius: 0.5rem;
+    }
+    
+    /* Custom styles for playlist cards */
+    .playlist-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      background-color: var(--container-color);
+      border-radius: 0.75rem;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .playlist-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+    .playlist-card.active {
+      border: 2px solid var(--first-color);
+    }
+    .playlist-thumbnail {
+      position: relative;
+      overflow: hidden;
+    }
+    .playlist-thumbnail::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.3) 100%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .playlist-card:hover .playlist-thumbnail::after {
+      opacity: 1;
+    }
+    .playlist-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: 2;
+    }
+    .playlist-card:hover .playlist-overlay {
+      opacity: 1;
+    }
+    .spotify-icon {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(0, 0, 0, 0.7);
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 3;
+    }
+    
+    /* Artist Card Styles */
+    .artist-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      background-color: var(--container-color);
+      border-radius: 0.75rem;
+      overflow: hidden;
+      cursor: pointer;
+      text-align: center;
+    }
+    .artist-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+    .artist-image-container {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin: 0 auto;
+      position: relative;
+    }
+    .artist-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .artist-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      border-radius: 50%;
+    }
+    .artist-card:hover .artist-overlay {
+      opacity: 1;
+    }
+    
+    /* Genre Tags */
+    .genre-tag {
+      display: inline-block;
+      background-color: var(--first-color);
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 2rem;
+      margin: 0.25rem;
+      font-size: 0.875rem;
+      transition: background-color 0.3s ease;
+    }
+    .genre-tag:hover {
+      background-color: var(--first-color-alt);
+    }
+  </style>
+</head>
+
+<body class="bg-[var(--body-color)] text-[var(--text-color)]">
+
+  <!-- ==================== NAVBAR (sama) ==================== -->
+  <header class="fixed top-0 left-0 w-full z-50 bg-[var(--body-color)] shadow-md">
+    <nav class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+      <a href="../index.html" class="text-xl font-bold text-[var(--title-color)]">Alfian</a>
+
+      <!-- Desktop Menu -->
+      <ul class="hidden md:flex gap-6 items-center">
+        <li><a href="../index.html#home" class="hover:text-[var(--first-color)] transition">Home</a></li>
+        <li><a href="../index.html#about" class="hover:text-[var(--first-color)] transition">About</a></li>
+        <li><a href="../index.html#skills" class="hover:text-[var(--first-color)] transition">Skills</a></li>
+        <li><a href="../index.html#certificates" class="hover:text-[var(--first-color)] transition">Certificates</a></li>
+        <li><a href="../index.html#videos" class="hover:text-[var(--first-color)] transition">Videos</a></li>
+        <li><a href="./playlist.html" class="text-[var(--first-color)] font-semibold transition">Playlist</a></li>
+        <li><a href="../index.html#gear" class="hover:text-[var(--first-color)] transition">Shop</a></li>
+        <li><a href="../index.html#contact" class="hover:text-[var(--first-color)] transition">Contact</a></li>
+        <li><i class="uil uil-moon cursor-pointer text-[var(--title-color)]" id="theme-toggle"></i></li>
+      </ul>
+
+      <!-- Mobile Menu Button -->
+      <i class="uil uil-apps md:hidden text-2xl cursor-pointer" id="mobile-menu-toggle"></i>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 bg-[var(--body-color)]">
+      <ul class="flex flex-col gap-4">
+        <li><a href="../index.html" class="block hover:text-[var(--first-color)] transition">Home</a></li>
+        <li><a href="../index.html.html#about" class="block hover:text-[var(--first-color)] transition">About</a></li>
+        <li><a href="../index.html.html#skills" class="block hover:text-[var(--first-color)] transition">Skills</a></li>
+        <li><a href="../index.html.html#certificates" class="block hover:text-[var(--first-color)] transition">Certificates</a></li>
+        <li><a href="../index.html.html#videos" class="block hover:text-[var(--first-color)] transition">Videos</a></li>
+        <li><a href="./playlist.html" class="block text-[var(--first-color)] font-semibold transition">Playlist</a></li>
+        <li><a href="../index.html.html#gear" class="block hover:text-[var(--first-color)] transition">Shop</a></li>
+        <li><a href="../index.html.html#contact" class="block hover:text-[var(--first-color)] transition">Contact</a></li>
+        <li><i class="uil uil-moon cursor-pointer text-[var(--title-color)]" id="mobile-theme-toggle"></i></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- ==================== PLAYLIST CONTENT ==================== -->
+  <section class="min-h-screen px-6 pt-32 pb-20">
+    <div class="max-w-6xl mx-auto">
+      <div data-aos="fade-up" class="text-center mb-12">
+        <h1 class="text-4xl md:text-5xl font-bold">Playlist Gwe</h1>
+        <p class="text-[var(--text-color-light)] mt-2">Yang nemenin gw pas sendiri</p>
+      </div>
+
+      <!-- Featured Playlist (Besar) -->
+      <div data-aos="fade-up" class="mb-16">
+        <h2 class="text-2xl font-bold mb-6">Featured Playlist</h2>
+        <div class="rounded-2xl shadow-lg overflow-hidden">
+          <iframe
+            id="featured-playlist"
+            src="https://open.spotify.com/embed/playlist/69sZ6wNLvYow30X8cHTvyp?utm_source=generator"
+            width="100%"
+            height="480"
+            frameborder="0"
+            allowfullscreen=""
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
+          </iframe>
+        </div>
+      </div>
+
+      <!-- Playlist Categories -->
+      <div data-aos="fade-up" class="mb-12">
+        <h2 class="text-2xl font-bold mb-6">All Playlists</h2>
+        
+        <!-- Playlist Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Playlist Card 1 -->
+          <a href="https://open.spotify.com/playlist/49qtYZo1UzUaghvZ2QuQMs?si=sbokGUSbT5iLXVyT_uX7tw" target="_blank" class="playlist-card block" data-aos="fade-up" data-aos-delay="100">
+            <div class="playlist-thumbnail relative">
+              <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" 
+                   alt="Work Focus" class="w-full h-48 object-cover">
+              <div class="spotify-icon">
+                <i class="uil uil-spotify text-white"></i>
+              </div>
+              <div class="playlist-overlay">
+                <span class="bg-[var(--first-color)] text-white px-4 py-2 rounded-full flex items-center">
+                  <i class="uil uil-external-link-alt mr-2"></i> Open in Spotify
+                </span>
+              </div>
+            </div>
+            <div class="p-4">
+              <h3 class="font-bold text-lg mb-1">Gimane ya</h3>
+              <p class="text-sm text-[var(--text-color-light)] mb-3">galau dikit boleh kan?</p>
+              <div class="flex justify-between items-center">
+                <span class="text-xs text-[var(--first-color)]">89 tracks</span>
+                <span class="text-xs text-[var(--text-color-light)]">Spotify</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- Playlist Card 2 -->
+          <a href="https://open.spotify.com/playlist/2Juc8zpNrTwjCFOEZm9Zko?si=046483a5e9b247ab" target="_blank" class="playlist-card block" data-aos="fade-up" data-aos-delay="200">
+            <div class="playlist-thumbnail relative">
+              <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" 
+                   alt="Chill Vibes" class="w-full h-48 object-cover">
+              <div class="spotify-icon">
+                <i class="uil uil-spotify text-white"></i>
+              </div>
+              <div class="playlist-overlay">
+                <span class="bg-[var(--first-color)] text-white px-4 py-2 rounded-full flex items-center">
+                  <i class="uil uil-external-link-alt mr-2"></i> Open in Spotify
+                </span>
+              </div>
+            </div>
+            <div class="p-4">
+              <h3 class="font-bold text-lg mb-1">Lagu Kalem Enak Didenger</h3>
+              <p class="text-sm text-[var(--text-color-light)] mb-3">Nggak nora lagunya</p>
+              <div class="flex justify-between items-center">
+                <span class="text-xs text-[var(--first-color)]">69 tracks</span>
+                <span class="text-xs text-[var(--text-color-light)]">Spotify</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- Playlist Card 3 -->
+          <a href="https://open.spotify.com/playlist/2VD34T1bwpwKUH15NPIl2a?si=1Num7VPyQPmtRnpEPdX6rg" target="_blank" class="playlist-card block" data-aos="fade-up" data-aos-delay="300">
+            <div class="playlist-thumbnail relative">
+              <img src="https://i.pinimg.com/736x/41/36/35/4136358712d35f5609684f74675f005b.jpg" 
+                   alt="Creative Flow" class="w-full h-48 object-cover">
+              <div class="spotify-icon">
+                <i class="uil uil-spotify text-white"></i>
+              </div>
+              <div class="playlist-overlay">
+                <span class="bg-[var(--first-color)] text-white px-4 py-2 rounded-full flex items-center">
+                  <i class="uil uil-external-link-alt mr-2"></i> Open in Spotify
+                </span>
+              </div>
+            </div>
+            <div class="p-4">
+              <h3 class="font-bold text-lg mb-1">Playlist Ngegym</h3>
+              <p class="text-sm text-[var(--text-color-light)] mb-3">mood bagus badan bagus</p>
+              <div class="flex justify-between items-center">
+                <span class="text-xs text-[var(--first-color)]">39 tracks</span>
+                <span class="text-xs text-[var(--text-color-light)]">Spotify</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- Playlist Card 4 -->
+          <a href="https://open.spotify.com/playlist/3dWi6E1gRpXfrm08rlQIPM?si=4Te2Fh2ISuGrB6DgOcw2lA" target="_blank" class="playlist-card block" data-aos="fade-up" data-aos-delay="400">
+            <div class="playlist-thumbnail relative">
+              <img src="https://i.pinimg.com/736x/f1/c1/86/f1c1865651a5c9a7d4eab00e34408429.jpg" 
+                   alt="Night Coding" class="w-full h-48 object-cover">
+              <div class="spotify-icon">
+                <i class="uil uil-spotify text-white"></i>
+              </div>
+              <div class="playlist-overlay">
+                <span class="bg-[var(--first-color)] text-white px-4 py-2 rounded-full flex items-center">
+                  <i class="uil uil-external-link-alt mr-2"></i> Open in Spotify
+                </span>
+              </div>
+            </div>
+            <div class="p-4">
+              <h3 class="font-bold text-lg mb-1">Playlist Anti Ngantuk</h3>
+              <p class="text-sm text-[var(--text-color-light)] mb-3">Buat motoran sabi bat ini</p>
+              <div class="flex justify-between items-center">
+                <span class="text-xs text-[var(--first-color)]">305 tracks</span>
+                <span class="text-xs text-[var(--text-color-light)]">Spotify</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- Playlist Card 5 -->
+          <a href="https://open.spotify.com/playlist/1gRs34loHLYkeAMwdN3a7L?si=yo5iilsDQMGFc-GzyfKTUwM" target="_blank" class="playlist-card block" data-aos="fade-up" data-aos-delay="500">
+            <div class="playlist-thumbnail relative">
+              <img src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" 
+                   alt="Morning Boost" class="w-full h-48 object-cover">
+              <div class="spotify-icon">
+                <i class="uil uil-spotify text-white"></i>
+              </div>
+              <div class="playlist-overlay">
+                <span class="bg-[var(--first-color)] text-white px-4 py-2 rounded-full flex items-center">
+                  <i class="uil uil-external-link-alt mr-2"></i> Open in Spotify
+                </span>
+              </div>
+            </div>
+            <div class="p-4">
+              <h3 class="font-bold text-lg mb-1">Morning Boost</h3>
+              <p class="text-sm text-[var(--text-color-light)] mb-3">Keroncongan pagi-pagi</p>
+              <div class="flex justify-between items-center">
+                <span class="text-xs text-[var(--first-color)]">80 tracks</span>
+                <span class="text-xs text-[var(--text-color-light)]">Spotify</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- Playlist Card 6 -->
+          <a href="https://open.spotify.com/playlist/2emF93QaDgT9zx6AryhfPr?si=e80d209bf0ec492e01" target="_blank" class="playlist-card block" data-aos="fade-up" data-aos-delay="600">
+            <div class="playlist-thumbnail relative">
+              <img src="https://images.unsplash.com/photo-1494232410401-ad00d5433cfa?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" 
+                   alt="Road Trip" class="w-full h-48 object-cover">
+              <div class="spotify-icon">
+                <i class="uil uil-spotify text-white"></i>
+              </div>
+              <div class="playlist-overlay">
+                <span class="bg-[var(--first-color)] text-white px-4 py-2 rounded-full flex items-center">
+                  <i class="uil uil-external-link-alt mr-2"></i> Open in Spotify
+                </span>
+              </div>
+            </div>
+            <div class="p-4">
+              <h3 class="font-bold text-lg mb-1">Buat Gua Tidur</h3>
+              <p class="text-sm text-[var(--text-color-light)] mb-3">Mimpi Indahhhh</p>
+              <div class="flex justify-between items-center">
+                <span class="text-xs text-[var(--first-color)]">98 tracks</span>
+                <span class="text-xs text-[var(--text-color-light)]">Spotify</span>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Favorite Artists -->
+      <div data-aos="fade-up" class="mb-12">
+        <h2 class="text-2xl font-bold mb-6">Favorite Artists</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Artist 1 -->
+          <a href="https://open.spotify.com/artist/0du5cEVh5yTK9QJze8zA0C?si=69231e0df03a4e3e" target="_blank" class="artist-card block" data-aos="fade-up" data-aos-delay="100">
+            <div class="artist-image-container">
+              <img src="https://i.scdn.co/image/ab6761610000e5ebc36dd9eb55fb0db4911f25dd" alt="Bruno Mars" class="artist-image">
+              <div class="artist-overlay">
+                <span class="bg-[var(--first-color)] text-white px-4 py-2 rounded-full flex items-center">
+                  <i class="uil uil-external-link-alt mr-2"></i> View on Spotify
+                </span>
+              </div>
+            </div>
+            <div class="p-4">
+              <h3 class="font-bold text-lg mt-4">Bruno Mars</h3>
+              <p class="text-sm text-[var(--text-color-light)]">Pop, R&B, Funk</p>
+            </div>
+          </a>
+
+          <!-- Artist 2 -->
+          <a href="https://open.spotify.com/artist/66CXWjxzNUsdJxJ2JdwvnR?si=cbc183f3c0c24611" target="_blank" class="artist-card block" data-aos="fade-up" data-aos-delay="200">
+            <div class="artist-image-container">
+              <img src="https://i.pinimg.com/736x/7b/0a/37/7b0a376863a69b13d4c1f467fec129f1.jpg" alt="Ariana Grande" class="artist-image">
+              <div class="artist-overlay">
+                <span class="bg-[var(--first-color)] text-white px-4 py-2 rounded-full flex items-center">
+                  <i class="uil uil-external-link-alt mr-2"></i> View on Spotify
+                </span>
+              </div>
+            </div>
+            <div class="p-4">
+              <h3 class="font-bold text-lg mt-4">Ariana Grande</h3>
+              <p class="text-sm text-[var(--text-color-light)]">Pop, R&B</p>
+            </div>
+          </a>
+
+          <!-- Artist 3 -->
+          <a href="https://open.spotify.com/artist/2iDVt6mFbtbDEZG5ax0dTi?si=029b5205dc184479" target="_blank" class="artist-card block" data-aos="fade-up" data-aos-delay="300">
+            <div class="artist-image-container">
+              <img src="https://i.pinimg.com/1200x/5f/28/b9/5f28b94b4f4ffabdf8a094c95631eada.jpg" alt="Tulus" class="artist-image">
+              <div class="artist-overlay">
+                <span class="bg-[var(--first-color)] text-white px-4 py-2 rounded-full flex items-center">
+                  <i class="uil uil-external-link-alt mr-2"></i> View on Spotify
+                </span>
+              </div>
+            </div>
+            <div class="p-4">
+              <h3 class="font-bold text-lg mt-4">Tulus</h3>
+              <p class="text-sm text-[var(--text-color-light)]">Pop, Jazz</p>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Favorite Genres -->
+      <div data-aos="fade-up" class="mb-12">
+        <h2 class="text-2xl font-bold mb-6">Favorite Genres</h2>
+        <div class="flex flex-wrap justify-center">
+          <a href="https://open.spotify.com/genre/hiphop-page" target="_blank" class="genre-tag">Hip Hop</a>
+          <a href="https://open.spotify.com/genre/rb-page" target="_blank" class="genre-tag">R&B</a>
+          <a href="https://open.spotify.com/genre/pop-page" target="_blank" class="genre-tag">Pop</a>
+          <a href="https://open.spotify.com/genre/jazz-page" target="_blank" class="genre-tag">Jazz</a>
+        </div>
+      </div>
+
+      <!-- Kembali -->
+      <div class="mt-12 text-center">
+        <a href="../index.html" class="inline-flex items-center px-6 py-3 bg-[var(--first-color)] text-white rounded-lg hover:bg-[var(--first-color-alt)] transition">
+          <i class="uil uil-arrow-left mr-2"></i> Back to Home
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER (sama) ==================== -->
+  <footer class="bg-[var(--first-color)] text-white py-10 px-6">
+    <div class="max-w-6xl mx-auto grid md:grid-cols-3 gap-6">
+      <div>
+        <h1 class="text-2xl font-bold">Alfian</h1>
+        <p class="text-sm">Videographer</p>
+      </div>
+      <ul class="flex flex-col gap-2">
+        <li><a href="../index.html" class="hover:underline">About</a></li>
+        <li><a href="../index.htmlhtml#skills" class="hover:underline">Skills</a></li>
+        <li><a href="../index.htmlhtml#certificates" class="hover:underline">Certificates</a></li>
+        <li><a href="../index.htmlhtml#gear" class="hover:underline">Shop</a></li>
+        <li><a href="../index.htmlhtml#contact" class="hover:underline">Contact</a></li>
+      </ul>
+      <div class="flex gap-4">
+        <a href="https://www.instagram.com/zakrialff/ " target="_blank"><i class="uil uil-instagram text-2xl"></i></a>
+        <a href="https://github.com/alfikitty " target="_blank"><i class="uil uil-github-alt text-2xl"></i></a>
+        <a href="https://twitter.com/mrinmoy91013697 " target="_blank"><i class="uil uil-twitter-alt text-2xl"></i></a>
+      </div>
+    </div>
+    <p class="text-center text-sm mt-6">&copy; 2025 Alfian. All rights reserved.</p>
+  </footer>
+
+  <!-- Scroll Up -->
+  <a href="#" id="scroll-up" class="fixed bottom-20 right-6 bg-[var(--first-color)] text-white p-2 rounded-full shadow-lg hover:bg-[var(--first-color-alt)] transition">
+    <i class="uil uil-arrow-up text-xl"></i>
+  </a>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@next/dist/aos.js "></script>
+  <script>
+    AOS.init({ offset: 120, duration: 1200 });
+
+    /* Dark-mode toggle */
+    const toggleTheme = () => document.body.classList.toggle("dark-theme");
+    document.getElementById("theme-toggle").addEventListener("click", toggleTheme);
+    document.getElementById("mobile-theme-toggle").addEventListener("click", toggleTheme);
+
+    /* Mobile menu toggle */
+    const mobileMenu = document.getElementById("mobile-menu");
+    document.getElementById("mobile-menu-toggle").addEventListener("click", () => {
+      mobileMenu.classList.toggle("hidden");
+    });
+  </script>
+</body>
+</html>
